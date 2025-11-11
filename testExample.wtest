@@ -1,9 +1,19 @@
-import example.pepita
+import example.*;
 
-describe "group of tests for pepita" {
+describe "test" {
+  test "playa" {
+    const playa1 = new Playa (largoPlaya = 1500)
+    playa1.idioma("portugues")
+    playa1.cantidadDias()
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+    assert.that(playa1.idiomas().all())
   }
 
+  test "excursion" {
+    const excursion1 = new Excursion (cantidadAtracciones = 4, esExcurisionNormal = true)
+    const excursion2 = new Excursion (cantidadAtracciones = 4, esExcurisionNormal = false)
+    assert.equals(3, excursion2.cantidadDias())
+    assert.notThat(excursion2.implicaEsfuerzo())
+    assert.that(excursion2.sirveParaBroncearse())
+  } 
 }
