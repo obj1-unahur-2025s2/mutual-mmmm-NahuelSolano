@@ -1,32 +1,33 @@
 class Viaje {
-  var dias = 0;
   var diasDeCadaViaje = 0
-  var idiomasDelViaje = []
 
-  method idiomas() {
-    return idiomasDelViaje;
-  }
+  method idioma()
+
+  method cantidadDias()
 
   method sirveParaBroncearse()
 
   method implicaEsfuerzo()
 
-  method diasTotales() {
-    return dias
-  }
+  method esInteresante()
 }
+
+
+
 
 class Playa inherits Viaje {
   const largoPlaya
+  const idiomas
+  var idiomasDeLaPlaya =[]
 
-  method idioma(idioma){
-    idiomasDelViaje.add(idioma)
+  override method cantidadDias(){
+    diasDeCadaViaje = largoPlaya / 500
+    return diasDeCadaViaje;
   }
 
-  method cantidadDias(){
-    diasDeCadaViaje = largoPlaya / 500
-    dias = dias + diasDeCadaViaje;
-    return diasDeCadaViaje;
+    override method idioma() {
+    idiomasDeLaPlaya.add(idiomas)
+    return idiomasDeLaPlaya
   }
 
   override method implicaEsfuerzo(){
@@ -36,50 +37,66 @@ class Playa inherits Viaje {
   override method sirveParaBroncearse() {
     return true;
   }
+  override method esInteresante(){
+    return idiomasDeLaPlaya.size() >= 2;
+  }
+
+  method esRecomendadaPara(unSocio){
+    return self.esInteresante() && unSocio.leAtrae(self) && unSocio.actividadesHechas.size()
+  }
 
 }
+
+
+
+
+
 
 class Excursion inherits Viaje {
   const cantidadAtracciones
   const esExcurisionNormal
+  const idiomas
+  var idiomasDeLaExcursion = []
 
-  method idioma(idioma){
-    idiomasDelViaje.add(idioma)
-  }
-
-  method cantidadDias(){
+  override method cantidadDias(){
     diasDeCadaViaje = cantidadAtracciones / 2;
 
     if (not esExcurisionNormal) {
       diasDeCadaViaje = diasDeCadaViaje + 1 ;
     }
-
-    dias = dias + diasDeCadaViaje;
-
     return diasDeCadaViaje
   }
   override method implicaEsfuerzo(){
     return cantidadAtracciones >= 5 && cantidadAtracciones <= 8;
   }
+
+  override method idioma() {
+    idiomasDeLaExcursion.add(idiomas)
+    return idiomasDeLaExcursion
+  }
   
   override method sirveParaBroncearse() {
     return not esExcurisionNormal
   }
+
+  override method esInteresante(){
+    return idiomasDeLaExcursion.size() >= 2 || cantidadAtracciones == 5;
+  }
 }
+
+
+
+
+
 
 class Trekking inherits Viaje {
   const distanciaDeSenderos
   const diasDeSolPorAño
-  
-  method idioma(idioma){
-    idiomasDelViaje.add(idioma)
-  }
+  const idiomas
+  var idiomasDelTrekking = []
 
-  method cantidadDias(){
-
+  override method cantidadDias(){
     diasDeCadaViaje = distanciaDeSenderos / 50
-    dias = dias + diasDeCadaViaje
-
     return diasDeCadaViaje;
   }
 
@@ -90,4 +107,49 @@ class Trekking inherits Viaje {
   override method sirveParaBroncearse() {
     return diasDeSolPorAño >= 200 || diasDeSolPorAño >= 100 && diasDeSolPorAño <= 199 && distanciaDeSenderos >= 120
   }
+
+  override method esInteresante() {
+    return idiomasDelTrekking.size() >= 2 && diasDeSolPorAño >= 140;
+  }
+  
+  override method idioma() {
+    idiomasDelTrekking.add(idiomas)
+    return idiomasDelTrekking
+  }
+
+}
+
+
+
+
+
+class Gimnasia inherits Viaje {
+  const idiomas = "español"
+  const idiomaDelGimnasio = []
+
+  override method cantidadDias() {
+    diasDeCadaViaje = 1
+    return diasDeCadaViaje;
+  }
+
+  override method idioma() {
+
+    idiomaDelGimnasio.add(idiomas)
+
+    return idiomaDelGimnasio
+  }
+
+  override method sirveParaBroncearse() {
+    return false;
+  }
+
+  override method implicaEsfuerzo() {
+    return true;
+  }
+
+  override method esInteresante(){
+    return true
+  }
+  
+
 }

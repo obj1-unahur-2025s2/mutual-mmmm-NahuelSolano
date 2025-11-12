@@ -1,8 +1,10 @@
 import example.*;
 
+import socios.*
+
 describe "test" {
   test "playa" {
-    const playa1 = new Playa (largoPlaya = 1500)
+    const playa1 = new Playa (largoPlaya = 1500, idiomas = "italiano")
     playa1.idioma("portugues")
     playa1.cantidadDias()
 
@@ -10,10 +12,30 @@ describe "test" {
   }
 
   test "excursion" {
-    const excursion1 = new Excursion (cantidadAtracciones = 4, esExcurisionNormal = true)
-    const excursion2 = new Excursion (cantidadAtracciones = 4, esExcurisionNormal = false)
+    const excursion1 = new Excursion (cantidadAtracciones = 4, esExcurisionNormal = true, idiomas = "frances")
+    const excursion2 = new Excursion (cantidadAtracciones = 4, esExcurisionNormal = false, idiomas = "frances")
     assert.equals(3, excursion2.cantidadDias())
     assert.notThat(excursion2.implicaEsfuerzo())
     assert.that(excursion2.sirveParaBroncearse())
-  } 
+  }
+
+
+  test "anashe"{
+    const gim1 = new Gimnasia()
+    gim1.idioma("") 
+    assert.that(gim1.idiomasDeTodoElViaje().all())
+  }
+
+  test "asd" {
+    const playa1 = new Playa (largoPlaya = 1000, idiomas = "frances")
+    const playa2 = new Playa (largoPlaya = 2000, idiomas = "frances")
+
+    const roque = new Socio (maxActividades = 2, tipoDeSocio = tranquilo, edad = 78)
+    roque.regitrarActividad(playa1)
+    roque.regitrarActividad(playa2)
+
+    assert.that(roque.esAdoradorDelSol())
+    assert.that(roque.actividadesForzadas())
+  }
+
 }
